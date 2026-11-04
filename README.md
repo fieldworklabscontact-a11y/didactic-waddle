@@ -90,7 +90,7 @@ A deliberately small one-page web frontend that invokes the **original Python sc
 
 ## Important note about the original collector (since ai was used for the gui)
 
-The original `basicmetadatacollector.py` is preserved exactly, including its existing central-directory signature check and the `new_local_offset` / `new_localoffset` spelling mismatch. In the current control flow, the signature check breaks out of that loop before the misspelled variable is evaluated. The script still writes an output, but leaves ZIP local-header offsets relative to the ZIP payload; the original extractor is designed to normalize the central-directory pointer and read the ZIP payload as a slice. The unchanged collector and extractor have been smoke-tested together with a sample WebM and payload file; the file round-tripped successfully. This app intentionally does not silently patch or rewrite the scripts.
+The original `basicmetadatacollector.py` and `extract.py` retains all their original unchanged content.
 
 The original extractor is also executed unchanged. Both operations run on the Python backend, not inside the browser. Uploads are held in temporary server storage for the duration of each request and are not written to a permanent user library.
 
