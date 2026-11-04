@@ -22,7 +22,8 @@ while True:
         print("File not found.")
 
 output_name = input("Enter the name for the final output: ")
-
+if not output_name.endswith('.webm'):
+    output_name+='.webm'
 while True: 
     choice = input(f"Do you want to proceed with storing '{filename}' in '{videoname} named as {output_name}' ? (y/n)")
     if choice in ['y', 'yes']:
