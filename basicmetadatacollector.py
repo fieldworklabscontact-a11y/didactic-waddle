@@ -65,5 +65,12 @@ while curr_ptr < cd_offset + cd_size:
     curr_ptr += 46 + fn_len + extra_len + comment_len
 
 
+new_cd_offset = cd_offset + offset_shift
+zip_bytes[eocd_index + 16:eocd_index + 20] = struct.pack("I", new_cd_offset)
+with open(output_name, "wb") as f:
+    f.write(webm_data)
+    f.write(zip_bytes)
+
+print(f"Success! File is successfully nested as '{output_name}'.")
 
 
