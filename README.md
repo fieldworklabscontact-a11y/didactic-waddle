@@ -1,13 +1,16 @@
 # didactic-waddle
+Overview
+Polyglot files combine two different formats into a single file—in this case, a WebM video at the front with a ZIP archive attached to the back.
 
-Here is the plan: this repository is for storing data in videos: Here is the projected pipeline: 1. select a video and then a file that you want to store. (COMPLETED 4:17 pm 11/3/26) When the generate button is selected, the file injects itself into the metadata of the mp4 player. the file comes with an additional marker that is specific to the program which it flags and extracts after it is reinserted in the storage app.
+The main catch is that tacking a ZIP onto a video shifts its internal data pointers. Standard extraction tools usually get confused by this and throw errors. This toolkit fixes that problem cleanly: the encrypter adjusts the pointers when building the file, and the extractor figures them out automatically when it's time to pull everything back out.
 
-To do list:
-Find an app that allows for metadata to be seen and its folder partition; make a python script that prompts for this and accesses the appropriate file. (COMPLETED 11/3/26)
+How It Works
+1. The Encrypter (encrypt.py)
+What it does: Takes any file or folder, compresses it into a ZIP, checks how long the WebM video is, and updates all the internal ZIP pointers so they account for the video size.
 
-Append a new partition in the mp4 file with a specialized meta data marker that the app flags (UPDATE 11/3: I am using webm, storing files at the end of webm video files.)
+The Result: Outputs a single WebM file that plays like a normal video but holds your hidden data safely inside.
 
-Add the file into that partition
+2. The Smart Extractor (extract.py)
+What it does: Looks at the polyglot file to see how the pointers were set up.
 
-When a video is added to extract a file it finds the marked partion and copies the file and brings it to the user.
-
+The Result: If it finds absolute offsets (pointers that include the video size), it cleans them up safely in memory, skips any potential seek errors, and extracts your files smoothly.
