@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11130f">
+  <title>NEST — WebM payload tool</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="NEST home"><span class="brand-mark">N</span><span>NEST</span></a>
+      <span class="top-note">WEBM PAYLOAD TOOL</span>
+    </header>
+
+    <section class="intro" id="top">
+      <p class="eyebrow">A small utility for polyglot files</p>
+      <h1>One video.<br><span>More inside.</span></h1>
+      <p class="lede">Embed a ZIP payload into a WebM, or extract the payload from a file you've already nested.</p>
+    </section>
+
+    <section class="workspace" aria-label="File operations">
+      <article class="panel">
+        <div class="panel-head">
+          <div><span class="step">01 / EMBED</span><h2>Put files inside</h2></div>
+          <span class="glyph">↗</span>
+        </div>
+        <p class="panel-copy">Choose a WebM video and the file or folder you want to carry inside it.</p>
+
+        <form id="embed-form">
+          <label class="field-label" for="video-file">VIDEO FILE <span>.WEBM</span></label>
+          <label class="dropzone compact" for="video-file" id="video-drop">
+            <input id="video-file" type="file" accept=".webm,video/webm" required>
+            <span class="file-icon">▶</span><span class="drop-copy"><strong id="video-name">Choose a WebM</strong><small id="video-hint">The video remains playable</small></span><span class="choose">BROWSE</span>
+          </label>
+
+          <label class="field-label payload-label" for="payload-files">PAYLOAD <span>FILES OR FOLDER</span></label>
+          <label class="dropzone" for="payload-files" id="payload-drop">
+            <input id="payload-files" type="file" multiple required>
+            <span class="file-icon folder">▤</span><span class="drop-copy"><strong id="payload-name">Choose files</strong><small id="payload-hint">Select multiple files, or choose a folder below</small></span><span class="choose">BROWSE</span>
+          </label>
+          <div class="folder-pick"><span>OR</span><label for="payload-folder">SELECT A FOLDER</label><input id="payload-folder" type="file" webkitdirectory directory multiple></div>
+          <div class="field-row">
+            <label class="field-label" for="output-name">OUTPUT NAME</label>
+            <input class="text-input" id="output-name" value="nested.webm" maxlength="100" autocomplete="off">
+          </div>
+          <button class="primary" type="submit" id="embed-button"><span>Generate polyglot</span><span>→</span></button>
+        </form>
+      </article>
+
+      <article class="panel extract-panel">
+        <div class="panel-head">
+          <div><span class="step">02 / EXTRACT</span><h2>Get files back</h2></div>
+          <span class="glyph">↙</span>
+        </div>
+        <p class="panel-copy">Select a WebM containing an embedded ZIP archive. The recovered files download together.</p>
+        <form id="extract-form">
+          <label class="field-label" for="archive-file">POLYGLOT WEBM</label>
+          <label class="dropzone extract-drop" for="archive-file">
+            <input id="archive-file" type="file" accept=".webm,video/webm,application/octet-stream" required>
+            <span class="file-icon">◫</span><span class="drop-copy"><strong id="archive-name">Choose a polyglot</strong><small id="archive-hint">Select the video with its payload</small></span><span class="choose">BROWSE</span>
+          </label>
+          <button class="primary secondary" type="submit" id="extract-button"><span>Extract archive</span><span>→</span></button>
+        </form>
+        <div class="extract-note"><span class="note-dot"></span><span>Output is packaged as a ZIP download.</span></div>
+      </article>
+    </section>
+
+    <section class="status" id="status" aria-live="polite" hidden>
+      <span class="status-mark" id="status-mark">···</span>
+      <div><strong id="status-title">Working</strong><p id="status-message">Your files are being processed.</p></div>
+    </section>
+
+    <footer><span>BUILT AROUND THE ORIGINAL PYTHON SCRIPTS</span><span>LOCAL FILES IN · FILES OUT</span></footer>
+  </main>
+</body>
+</html>
