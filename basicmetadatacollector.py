@@ -59,7 +59,7 @@ cd_offset = struct.unpack('<I', zip_bytes[eocd_index + 16:eocd_index + 20])[0]
 cd_size = struct.unpack("<I", zip_bytes[eocd_index + 12:eocd_index + 16])[0]
 curr_ptr = cd_offset
 while curr_ptr < cd_offset + cd_size:
-    if zip_bytes[curr_ptr:curr_ptr+4] != b"\x50\x4b\x05x06":
+    if zip_bytes[curr_ptr:curr_ptr+4] != b"\x50\x4b\x05\x06":
         break
     local_offset = struct.unpack('<I', zip_bytes[curr_ptr + 42:curr_ptr +46])[0]
     new_local_offset = local_offset + offset_shift
