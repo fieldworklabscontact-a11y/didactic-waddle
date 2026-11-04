@@ -15,14 +15,16 @@ while True:
 
 while True:
     videoname = input("Enter the video file you put in this folder (Webm is only accepted): ")
-    if os.path.exists(videoname):
+    if os.path.exists(videoname) and videoname.endswith(".webm"):
         print("Successful! Please Wait.")
         break
     else:
         print("File not found.")
 
+output_name = input("Enter the name for the final output: ")
+
 while True: 
-    choice = input(f"Do you want to proceed with storing '{filename}' in '{videoname}' ? (y/n)")
+    choice = input(f"Do you want to proceed with storing '{filename}' in '{videoname} named as {output_name}' ? (y/n)")
     if choice in ['y', 'yes']:
         print("analyzing video")
         break
